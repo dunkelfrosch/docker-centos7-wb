@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+#
+# @copyright (c) 2016 Patrick Paechnatz <patrick.paechnatz@gmail.com>
+# @author patrick.paechnatz@gmail.com
+# @updated 2016/21/07
+# @version 1.0.0
+#
+
+# activate strict mode for bash
+set -e
+
+IMG_NAME="local/df/wb/centos/7/httpd/apache"
+CNT_NAME="me-bs-service-httpd"
+
+echo; read -p "... you should prefer docker-compose for our workbench! do you really want to start this container (y/n/J/j)?" -n 1 -r; echo
+if [[ ! $REPLY =~ ^[YyJj]$ ]]
+then
+    exit 9
+fi
+
+echo -e "\n\033[1;92mCentoDock: run [$IMG_NAME] as container [$CNT_NAME]\033[0m"
+CNT_ID=$(docker run --privileged -itd \
+           --name="$CNT_NAME" \
+           --cap-add=SYS_ADMIN \
+           --security-opt=seccomp:unconfined \
+           --stop-signal=SIGRTMIN+3 \
+           --volume=/sys/fs/cgroup:/sys/fs/cgroup \
+           --publish=80:80 \
+           $IMG_NAME)
+
+if ! docker top $CNT_ID &>/dev/null
+then
+    echo "container [$CNT_NAME] crashed unexpectedly ..."
+    return 1
+fi
+
+CNT_IP=$(docker inspect --format="{{ .NetworkSettings.IPAddress }}" $CNT_NAME)
+echo -e "\n\033[1;92mCentoDock: [$IMG_NAME] build successfully into container [$CNT_NAME] -> IP: $CNT_IP \033[0m"
+echo; read -p "do you want to login to this container (y/n/J/j) ?" -n 1 -r; echo
+if [[ ! $REPLY =~ ^[YyJj]$ ]]
+then
+    exit 9
+fi
+
+echo -e "TIP: you can access midnight-commander by typing $./mc -ac"
+docker exec -it $CNT_NAME bash

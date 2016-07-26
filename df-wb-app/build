@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#
+# @copyright (c) 2016 Patrick Paechnatz <patrick.paechnatz@gmail.com>
+# @author patrick.paechnatz@gmail.com
+# @updated 2016/03/06
+# @version 1.0.0
+#
+
+# activate strict mode for bash
+set -e
+
+IMG_NAME="local/df/wb/centos/7/httpd/apache/php70/app"
+IMG_DESCRIPTION="This image will be used as http/php70 service image\nThis image is using SYSTEMD as init system, so please install/setup\nextended services using systemd pattern."
+
+_show_title() {
+    echo -e "\n\033[1;92mCentoDock: build docker image [$IMG_NAME]\033[0m"
+    echo -e "$IMG_DESCRIPTION\n"
+}
+
+_show_title
+docker build -t $IMG_NAME .

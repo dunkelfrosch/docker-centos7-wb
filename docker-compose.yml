@@ -1,0 +1,57 @@
+#
+# CentOS 7.2.n workbench main factory
+#
+# version: 0.9.9.1001
+#
+# (c) 2016 dunkelfrosch impersonate
+#
+version: '2'
+
+services:
+
+  #
+  # [ our project source container ]
+  #
+  app:
+
+    image: local/df/wb/centos/7/httpd/apache/php70/app
+    container_name: df-wb-app
+    extends:
+       file: ./docker-compose-base.yml
+       service: app_base
+
+    volumes:
+      - ./df-wb-app/var/www/sources/app:/var/www/sources/app
+
+    depends_on:
+      - mysql
+
+    ports:
+      - "80:80"
+
+    networks:
+      - default
+
+  #
+  # [ our symfony mysql container ]
+  #
+  mysql:
+
+    image: local/df/wb/centos/7/rdbs/mysql57
+    container_name: df-wb-app-mysql
+    extends:
+       file: ./docker-compose-base.yml
+       service: app_base
+
+    ports:
+      - "3306:3306"
+
+    networks:
+      - default
+
+#
+# [ networks definition for atlassian and our (other) proxy services ]
+#
+networks:
+  default:
+    driver: bridge

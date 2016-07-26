@@ -1,0 +1,25 @@
+#
+# CentOS 7.2.n workbench base factory
+#
+# version: 0.9.9.1001
+#
+# (c) 2016 dunkelfrosch impersonate
+#
+version: '2'
+
+services:
+
+  #
+  # [ our base/default service definition ]
+  #
+  app_base:
+
+    restart: 'no'
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGRTMIN+3
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
