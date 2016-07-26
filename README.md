@@ -88,7 +88,7 @@ docker-machine upgrade <name-of-your-machine>
 docker images
 ```
 
-[![DM Config](https://dl.dropbox.com/s/vy4mkjpqtzjm7pc/ssh-dkr-images-001.png)](CONFIG)
+[![DM Config](https://dl.dropbox.com/s/w16clhzam9yw4ia/ssh-dkr-images-001.png)](CONFIG)
 
 
 2.2) run docker-compose to start our sample workbench
@@ -105,13 +105,13 @@ docker images
 ./docker logs df-wb-app
 ```
 
-[![Docker Logs 01](https://dl.dropbox.com/s/1ehutkrv6teau6b/ssh-dkr-systemd-logs-01-001.png)](APP)
+[![Docker Logs 01](https://dl.dropbox.com/s/q3itd4otpo582ki/ssh-dkr-systemd-logs-01-001.png)](APP)
 
 ```$
 ./docker logs df-wb-app-mysql
 ```
 
-[![Docker Logs 02](https://dl.dropbox.com/s/2hcnoa8x8rbt94v/ssh-dkr-systemd-logs-02-001.png)](MYSQL)
+[![Docker Logs 02](https://dl.dropbox.com/s/o678ymqizct4l30/ssh-dkr-systemd-logs-02-001.png)](MYSQL)
 
 
 ## MacOS/Linux: prepare your host configuration
@@ -135,7 +135,7 @@ call the your project url www.dunkelfrosch.intern (or in debug mode: www.dunkelf
 ### quick access to our workbench microservices
 you've always access to our microservice instance(s) by using the ```$ start``` script inside the corresponding service path. the system will start a dedicated service instance and ask you direct login after start ... feel free to use it. *be aware, the docker-compose should not be running at the same time! otherwise you'll got an error, that the named service is already in use*
 
-[![Docker Start 01](https://dl.dropbox.com/s/rf425jhz3f43w4v/ssh-dkr-start-01-001.png)](MYSQL)
+[![Docker Start 01](https://dl.dropbox.com/s/ciyvvyb6ca2hjm5/ssh-dkr-start-mysql57-001.png)](MYSQL)
 - in this case we've start our mysql 5.7 container directly using our ```$ start``` command
 
 
@@ -180,12 +180,10 @@ or this one ...
 ### usage of systemd
 any service inside our container will be handled by systemd. if you want further/detailed information about a specific service you can call him using the following command (in this case we've logged into your mysql57 service container)
 
-[![Docker Systemd-Start 01](https://dl.dropbox.com/s/yl87dqseqk262nm/ssh-dkr-systemd-mysql-001.png)](MYSQL)
+[![Docker Systemd-Start 01](https://dl.dropbox.com/s/e6fvyy8t8syndvf/ssh-dkr-start-systemctl-mysql57-001.png)](MYSQL)
 
 
 ## License-Term
-
-This workbench is based on dunkelfrosch GIT Repository [docker-centos7-wb](https://github.com/dunkelfrosch/docker-centos7-wb) 0.9.9 
 
 Copyright (c) 2015-2016 Patrick Paechnatz <patrick.paechnatz@gmail.com>
                                                                            
