@@ -12,15 +12,8 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - cd df-wb-centos-7; ./build; cd ..
-  -
-
-  # check normal docker build
-  - docker build -t dunkelfrosch/confluence:5.9.2 .
-  - docker run --name df_confluence -d -p 127.0.0.1:8090:8090 dunkelfrosch/confluence:5.9.2
-  - docker ps | grep "df_confluence"
-  - docker logs df_confluence
-
-  # remove container service 01
+  # execute travis build script
+  - cd ./df-wb-build; ./travis.sh; cd ..
+  # remove container and images
   - docker ps -aq | xargs docker rm -fv
   - docker images -q | xargs docker rmi -f

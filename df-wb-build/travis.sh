@@ -117,5 +117,4 @@ _image_build --image-name "local/df/wb/centos/7/rdbs/postresql95" --image-path "
 _image_build --image-name "local/df/wb/centos/7/httpd/apache" --image-path "./df-wb-httpd-apache"
 _image_build --image-name "local/df/wb/centos/7/httpd/apache/php56" --image-path "./df-wb-httpd-apache-php56"
 _image_build --image-name "local/df/wb/centos/7/httpd/apache/php70" --image-path "./df-wb-httpd-apache-php70"
-
-# _image_build --image-name "local/df/wb/centos/7/httpd/apache/php70/app" --image-path "./df-wb-app"
+_image_build --image-name "local/df/wb/centos/7/httpd/apache/php70/app" --image-path "./df-wb-app"
