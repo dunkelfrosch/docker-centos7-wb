@@ -1,0 +1,26 @@
+sudo: required
+
+env:
+  COMPOSE_VERSION: 1.8.0
+
+services:
+  - docker
+
+before_install:
+  - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+script:
+  - cd df-wb-centos-7; ./build; cd ..
+  -
+
+  # check normal docker build
+  - docker build -t dunkelfrosch/confluence:5.9.2 .
+  - docker run --name df_confluence -d -p 127.0.0.1:8090:8090 dunkelfrosch/confluence:5.9.2
+  - docker ps | grep "df_confluence"
+  - docker logs df_confluence
+
+  # remove container service 01
+  - docker ps -aq | xargs docker rm -fv
+  - docker images -q | xargs docker rmi -f
