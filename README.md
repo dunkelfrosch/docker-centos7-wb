@@ -1,4 +1,4 @@
-# CentOs 7.2.n Docker Workbench v0.9.9
+# CentOs 7.2.n Docker Workbench v1.0.0
 *this documentation isn't fully done yet - we're still working on major and minor issues corresponding to this repository base!*
 
 This repository provides the latest version of [CentOs 7.2.n](https://www.centos.org/) (SystemD/CTL) as docker-compose workbench dev teams runnable under OSX10 and containing the following services:
@@ -14,7 +14,7 @@ This repository provides the latest version of [CentOs 7.2.n](https://www.centos
 - base application data container (Symfony 3.1.n)
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![System Version](https://img.shields.io/badge/version-0.9.9-blue.svg)](VERSION)
+[![System Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](VERSION)
 
 
 ## Preparation
