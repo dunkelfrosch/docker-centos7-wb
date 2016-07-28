@@ -1,4 +1,9 @@
 # CentOs 7.2.n Docker Workbench v1.0.0
+
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
+[![System Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](VERSION)
+[![Build Status](https://travis-ci.org/dunkelfrosch/docker-centos7-wb.svg?branch=master)](https://travis-ci.org/dunkelfrosch/docker-centos7-wb)
+
 *this documentation isn't fully done yet - we're still working on major and minor issues corresponding to this repository base!*
 
 This repository provides the latest version of [CentOs 7.2.n](https://www.centos.org/) (SystemD/CTL) as docker-compose workbench dev teams runnable under OSX10 and containing the following services:
@@ -12,9 +17,6 @@ This repository provides the latest version of [CentOs 7.2.n](https://www.centos
 - base postgresql 9.3 image (Postgres/9.3.n)
 - base postgresql 9.5 image (Postgres/9.5.n)
 - base application data container (Symfony 3.1.n)
-
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![System Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](VERSION)
 
 
 ## Preparation
@@ -185,7 +187,7 @@ any service inside our container will be handled by systemd. if you want further
 
 ## License-Term
 
-Copyright (c) 2015-2016 Patrick Paechnatz <patrick.paechnatz@gmail.com>
+Copyright (c) 2016 Patrick Paechnatz <patrick.paechnatz@gmail.com>
                                                                            
 Permission is hereby granted,  free of charge,  to any  person obtaining a 
 copy of this software and associated documentation files (the "Software"),
