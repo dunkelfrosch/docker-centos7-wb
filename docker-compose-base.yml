@@ -1,9 +1,12 @@
 #
 # CentOS 7.2.n workbench base factory
 #
-# version: 0.9.9.1001
+# version: 0.9.9.1002
 #
 # (c) 2016 dunkelfrosch impersonate
+#
+# This file contain our base configuration for all systemd based service definitions.
+# Feel free to extend this file by your own microservice standards ...
 #
 version: '2'
 

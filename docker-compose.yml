@@ -1,7 +1,7 @@
 #
 # CentOS 7.2.n workbench main factory
 #
-# version: 0.9.9.1001
+# version: 0.9.9.1002
 #
 # (c) 2016 dunkelfrosch impersonate
 #
@@ -43,6 +43,7 @@ services:
        file: ./docker-compose-base.yml
        service: app_base
 
+    # inside dev workbench we'll expose the standard mysql port also!
     ports:
       - "3306:3306"
 
