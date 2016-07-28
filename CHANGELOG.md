@@ -9,6 +9,7 @@ _current_
 
 ### ADD
 - travis test process definition and helper script for image check
+- activate travis ci build
 
 ### FIX
 - minor documentation issues
