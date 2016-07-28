@@ -13,3 +13,7 @@
 ### project shared source
 
 - var/www/source/app/* : project source files
+
+### additional information
+
+this workbench project share will be use php 7.0.n as fast-cgi process, you're free to use mod_php instead (php7.0 | php56) ...
