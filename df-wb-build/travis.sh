@@ -78,11 +78,11 @@ _image_build_check() {
             img_name="${2}"
             img_cnt=$(docker images | grep "^$img_name" | wc -l)
             if [ $img_cnt -eq 0 ]; then
-                echo -e "\n\033[0;31m[FAILURE] previously generated image ${img_name} not found!\033[0m <EXIT>"
+                echo -e "\n\033[0;31m[FAILURE] previously generated image ${img_name} not found!\033[0m <EXIT>\n"
                 _docker_image_clear
                 exit 9
             else
-                echo -e "\n\033[1;92m[SUCCESS] image successfully generated -> ${img_name}\033[0m";
+                echo -e "\n\033[1;92m[SUCCESS] image successfully generated -> ${img_name}\033[0m\n";
             fi
 
             shift
