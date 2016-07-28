@@ -4,8 +4,16 @@ All notable changes of the DockerConfluence release series are documented in thi
 
 _This ChangeLog documentation start with version 0.9.9 (2016-07-24)_
 
-## [0.9.9], 2016-07-24:
+## [1.0.0], 2016-07-28:
 _current_
+
+### ADD
+- travis test process definition and helper script for image check
+
+### FIX
+- minor documentation issues
+
+## [0.9.9], 2016-07-24:
 
 ### ADD
 - providing base os image (CentOS/7.2.n)
