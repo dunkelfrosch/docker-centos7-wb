@@ -1,4 +1,4 @@
-# CentOS 7.2.n - Docker Workbench 0.9.9
+# CentOS 7.2.n - Docker Workbench 1.0.0
 
 All notable changes of the DockerConfluence release series are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -8,11 +8,18 @@ _This ChangeLog documentation start with version 0.9.9 (2016-07-24)_
 _current_
 
 ### ADD
-- travis test process definition and helper script for image check
-- activate travis ci build
+- travis ci build 
+- travis image build check
+- travis container microservice check
+- extend command list of ./dctl
+
+### CHANGE
+- move travis.sh logic into ./dctl-CLI helper
+- minor travis.yml exec improvements
 
 ### FIX
 - minor documentation issues
+- naming issue in diverse local container startUp scripts
 
 ## [0.9.9], 2016-07-24:
 

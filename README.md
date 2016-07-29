@@ -28,7 +28,7 @@ We recommend the [latest Docker version](https://github.com/docker/docker/blob/m
 
 
 ## MacOS, install local docker-machine
-We recommend the usage of docker-machine instead of native boot2docker vm image buildUp. So please generate your own docker-machine ... 
+We recommend the usage of docker-machine instead of native boot2docker vm image buildUp on MacOS/OSX. Alternatively you can use the new stable build of [Docker for Mac](https://blog.docker.com/2016/07/docker-for-mac-and-windows-production-ready/), released on 29-07-29 and available [here](https://download.docker.com/mac/stable/Docker.dmg). 
 
 1.1) using the following command to build your "dev" vm for docker:
 
