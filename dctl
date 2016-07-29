@@ -62,7 +62,7 @@ _image_build() {
 _image_build_check() {
 
     img_name=""
-    img_cnt=""
+    img_cnt=0
 
     case "${1}" in
         img|--image-name)
