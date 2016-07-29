@@ -123,7 +123,7 @@ echo -e "\n - build all images necessary for this workbench ... \n"
 echo "y" | ./dctl --build-all-images
 
 echo -e "\n - check runtime availability for all microServices ... \n"
-_container_check --image-name "local/df/wb/centos/7" --container-name "df-wb-centos7" --container-service-count 18 && \
+_container_check --image-name "local/df/wb/centos/7" --container-name "df-wb-centos7" --container-service-count 17 && \
 _container_check --image-name "local/df/wb/centos/7/httpd/apache" --container-name "df-wb-centos7-httpd" --container-service-count 19 && \
 _container_check --image-name "local/df/wb/centos/7/httpd/apache/php56" --container-name "df-wb-centos7-httpd-php56" --container-service-count 20 && \
 _container_check --image-name "local/df/wb/centos/7/httpd/apache/php70" --container-name "df-wb-centos7-httpd-php70" --container-service-count 20 && \
