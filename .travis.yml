@@ -9,7 +9,7 @@ services:
 before_install:
   # install latest docker version
   - sudo apt-get update -y
-  - sudo apt-get install -y docker-engine
+  - sudo apt-get install -y -f docker-engine
   # install (pre)defined docker-compose version
   - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
