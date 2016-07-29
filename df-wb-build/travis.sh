@@ -2,17 +2,19 @@
 #
 # travis build/check helper script, feel free to extend|improve me ;)
 #
+# info: this script wont be necessary anymore, will be (re)used in later releases
+#
 # @copyright (c) 2016 Patrick Paechnatz <patrick.paechnatz@gmail.com>
 # @author patrick.paechnatz@gmail.com
 # @updated 2016/27/07
-# @version 1.0.0
+# @version 1.0.1
 #
 
 # activate strict mode for bash
 set -e
 
 # some default definitions
-VERSION="1.0.0"
+VERSION="1.0.1"
 
 # some default configuration constants
 SCRIPT_PATH=$(dirname "$0")
@@ -39,10 +41,11 @@ _image_destroy() {
     esac
 }
 
-_image_build() {
+_container_check() {
 
     img_name=""
-    img_path=""
+    cnt_name=""
+    service_count=0
 
     while [[ ${1} ]]; do
 
@@ -51,11 +54,16 @@ _image_build() {
                 img_name="${2}"
                 shift
                 ;;
-            path|--image-path)
-                img_path="${2}"
+
+            container|--container-name)
+                cnt_name="${2}"
                 shift
                 ;;
 
+            scount|--container-service-count)
+                service_count="${2}"
+                shift
+                ;;
         esac
         if ! shift; then
             echo "missing parameter arguments!" >&2
@@ -63,41 +71,42 @@ _image_build() {
         fi
     done
 
-   cd ${img_path} && docker build -t ${img_name} . && cd ..
-    _image_build_check img ${img_name}
-}
+    cnt_id=$(docker run --privileged -itd \
+               --name="${cnt_name}" \
+               --cap-add=SYS_ADMIN \
+               --security-opt=seccomp:unconfined \
+               --stop-signal=SIGRTMIN+3 \
+               --volume=/sys/fs/cgroup:/sys/fs/cgroup \
+               ${img_name})
 
-_image_build_check() {
+    if ! docker top ${cnt_id} &>/dev/null
+    then
+        echo -e "\n\033[0;31m[FAILURE] started container ${img_name} crashed unexpectedly!\033[0m <EXIT>\n"
+        return 1
+    fi
 
-    img_name=""
-    img_cnt=""
+    echo "wait 3 seconds before service check ..."; sleep 3s
+   _cnt=$(docker logs ${cnt_name} | grep '\[*OK' | wc -l)
+    if [ $_cnt -eq ${service_count} ]; then
+        echo -e "\033[1;92m[SUCCESS] all required systemd services loaded  -> ${img_name} <${cnt_name}>\033[0m";
+    else
+        echo -e "\n\033[0;31m[FAILURE] not all service loaded successfully!\033[0m <EXIT>\n"
+        echo "          -> looking for ${service_count} services but found ${_cnt}"
+        _docker_container_clear
+        exit 9
+    fi
 
-    case "${1}" in
-        img|--image-name)
-
-            img_name="${2}"
-            img_cnt=$(docker images | grep "^$img_name" | wc -l)
-            if [ $img_cnt -eq 0 ]; then
-                echo -e "\n\033[0;31m[FAILURE] previously generated image ${img_name} not found!\033[0m <EXIT>\n"
-                _docker_image_clear
-                exit 9
-            else
-                echo -e "\n\033[1;92m[SUCCESS] image successfully generated -> ${img_name}\033[0m\n";
-            fi
-
-            shift
-        ;;
-
-    esac
+    echo "wait 1 second before container disarming ..."
+    sleep 1s; _docker_container_clear
 }
 
 _docker_container_clear() {
-    echo -e "\n\033[1;92m [PREPARE] remove all container \033[0m";
+    echo -e "\n\033[1;92mremove all container \033[0m";
     docker rm -fv $(docker ps -a -q)
 }
 
 _docker_image_clear() {
-    echo -e "\n\033[1;92m [PREPARE] remove all dangling images \033[0m";
+    echo -e "\n\033[1;92mremove all dangling images \033[0m";
     docker images -q --filter "dangling=true" | xargs docker rmi -f
 }
 
@@ -109,12 +118,16 @@ _show_title
 
 cd ..
 
-_image_build --image-name "local/df/wb/centos/7" --image-path "./df-wb-centos-7"
-_image_build --image-name "local/df/wb/centos/7/rdbs/mysql56" --image-path "./df-wb-rdbs-mysql56"
-_image_build --image-name "local/df/wb/centos/7/rdbs/mysql57" --image-path "./df-wb-rdbs-mysql57"
-_image_build --image-name "local/df/wb/centos/7/rdbs/postresql93" --image-path "./df-wb-rdbs-postgresql93"
-_image_build --image-name "local/df/wb/centos/7/rdbs/postresql95" --image-path "./df-wb-rdbs-postgresql95"
-_image_build --image-name "local/df/wb/centos/7/httpd/apache" --image-path "./df-wb-httpd-apache"
-_image_build --image-name "local/df/wb/centos/7/httpd/apache/php56" --image-path "./df-wb-httpd-apache-php56"
-_image_build --image-name "local/df/wb/centos/7/httpd/apache/php70" --image-path "./df-wb-httpd-apache-php70"
-_image_build --image-name "local/df/wb/centos/7/httpd/apache/php70/app" --image-path "./df-wb-app"
+# build all images necessary for this workbench
+echo "y" | ./dctl --build-all-images
+
+# check runtime availability for all microservices
+
+_container_check --image-name "local/df/wb/centos/7" --container-name "df-wb-centos7" --container-service-count 18
+_container_check --image-name "local/df/wb/centos/7/httpd/apache" --container-name "df-wb-centos7-httpd" --container-service-count 19
+_container_check --image-name "local/df/wb/centos/7/httpd/apache/php56" --container-name "df-wb-centos7-httpd-php56" --container-service-count 20
+_container_check --image-name "local/df/wb/centos/7/httpd/apache/php70" --container-name "df-wb-centos7-httpd-php70" --container-service-count 20
+_container_check --image-name "local/df/wb/centos/7/rdbs/mysql57" --container-name "df-wb-centos7-rdbs-mysql57" --container-service-count 19
+_container_check --image-name "local/df/wb/centos/7/rdbs/mysql56" --container-name "df-wb-centos7-rdbs-mysql56" --container-service-count 17
+_container_check --image-name "local/df/wb/centos/7/rdbs/postresql95" --container-name "df-wb-centos7-rdbs-pgsql95" --container-service-count 19
+_container_check --image-name "local/df/wb/centos/7/rdbs/postresql93" --container-name "df-wb-centos7-rdbs-pgsql93" --container-service-count 19
