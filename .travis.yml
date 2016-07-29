@@ -1,18 +1,22 @@
 sudo: required
+dist: trusty
 
 env:
   COMPOSE_VERSION: 1.8.0
 
-# services:
-#  - docker
-
 before_install:
   # install latest docker version
-  # - sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-  - sudo apt-get remove -y docker-engine
-  - sudo apt-get update -y
-  - sudo apt-get install -y docker-engine
+  - sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  - deb https://apt.dockerproject.org/repo ubuntu-trusty main
+  - sudo apt-get update
+  - sudo apt-get purge lxc-docker
+  - sudo apt-cache policy docker-engine
+  - sudo apt-get install linux-image-extra-$(uname -r)
+  - sudo apt-get install apparmor
+  - sudo apt-get update
+  - sudo apt-get install docker-engine
   - sudo service docker start
+
   # install (pre)defined docker-compose version
   - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
