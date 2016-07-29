@@ -12,11 +12,8 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - docker --version
-  # - sudo service docker restart
 
 script:
   # execute travis build script
-  - cd ./df-wb-build; ./travis.sh; cd ..
-  # remove images
+  - cd ./df-wb-build; ./travis.sh
   - docker images -q | xargs docker rmi -f
