@@ -150,6 +150,11 @@ we've create a simple docker-control bash script for this workbench. You can fin
  -> build all images inside this workbench
 
 ```$
+./dctl val | --validate-workbench
+```
+ -> validate all images availability for this workbench
+ 
+```$
 ./dctl rec | --remove-exited-container
 ```
  -> remove all exited containers including ofs volumes
@@ -162,7 +167,7 @@ we've create a simple docker-control bash script for this workbench. You can fin
 ```$
 ./dctl rdi | --remove-dangling-images
 ```
- -> emove all dangling <none>/<incomplete> images
+ -> remove all dangling <none>/<incomplete> images
  
 
 ### systemd issues on mac
