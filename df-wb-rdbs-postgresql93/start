@@ -10,7 +10,7 @@
 set -e
 
 IMG_NAME="local/df/wb/centos/7/rdbs/postresql93"
-CNT_NAME="me-bs-service-rdbs-postresql93"
+CNT_NAME="df-wb-service-rdbs-postresql93"
 
 echo; read -p "... you should prefer docker-compose for our workbench! do you really want to start this container (y/n/J/j)?" -n 1 -r; echo
 if [[ ! $REPLY =~ ^[YyJj]$ ]]
