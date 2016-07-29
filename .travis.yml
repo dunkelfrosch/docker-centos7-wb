@@ -20,3 +20,5 @@ script:
   - cd ./df-wb-build; ./travis.sh; cd ..
   # remove images
   - docker images -q | xargs docker rmi -f
+  # show docker/docker-compose version (dbg)
+  - docker --version; docker-compose --version
