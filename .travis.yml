@@ -8,8 +8,8 @@ service:
 
 before_install:
   # install latest docker version
-  - sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-  - echo "deb https://apt.dockerproject.org/repo ubuntu-precise main" | sudo tee -a /etc/apt/sources.list
+  # - sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  # - echo "deb https://apt.dockerproject.org/repo ubuntu-precise main" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update
   - sudo apt-get install -y -o Dpkg::Options::="--force-confold" docker-engine
   # install (pre)defined docker-compose version
@@ -17,8 +17,8 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
-install:
-  - sudo service docker restart
+# install:
+#   - sudo service docker restart
 
 script:
   # execute travis build script
