@@ -4,8 +4,6 @@
 [![System Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](VERSION)
 [![Build Status](https://travis-ci.org/dunkelfrosch/docker-centos7-wb.svg?branch=master)](https://travis-ci.org/dunkelfrosch/docker-centos7-wb)
 
-*this documentation isn't fully done yet - we're still working on major and minor issues corresponding to this repository base!*
-
 This repository provides the latest version of [CentOs 7.2.n](https://www.centos.org/) (SystemD/CTL) as docker-compose workbench dev teams runnable under OSX10 and containing the following services:
 
 - base os image (CentOS/7.2.n)
@@ -46,7 +44,7 @@ docker-machine ls
 
 - status should be "running"
 
-1.3) improve your vm by edit the base "dev" vm json.config (~/.docker/machine/machines/<name-of-you-machine/config.json)
+1.3) improve your local vm by edit the base "dev" vm json.config (~/.docker/machine/machines/<name-of-you-machine/config.json)
 
 [![DM Config](https://dl.dropbox.com/s/vpciez0a5katnu6/ssh-dm-config-001.png)](CONFIG)
 
@@ -185,7 +183,7 @@ or this one ...
 
 
 ### usage of systemd
-any service inside our container will be handled by systemd. if you want further/detailed information about a specific service you can call him using the following command (in this case we've logged into your mysql57 service container)
+any service inside our container will be handled by systemd. if you want further/detailed information about a specific service you can call the service status using the following command (in this case we've logged into your mysql57 service container)
 
 [![Docker Systemd-Start 01](https://dl.dropbox.com/s/e6fvyy8t8syndvf/ssh-dkr-start-systemctl-mysql57-001.png)](MYSQL)
 
