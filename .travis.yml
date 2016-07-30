@@ -7,13 +7,16 @@ services:
   - docker
 
 before_install:
+  # install latest docker version
   - sudo apt-get update
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
+  # install specific (predefined) docker-compose version
   - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  # execute travis build script
+  # call travis build script
   - cd ./df-wb-build; ./travis.sh
+  # remove reviously generated images
   - docker images -q | xargs docker rmi -f
