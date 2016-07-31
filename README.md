@@ -44,7 +44,7 @@ docker-machine ls
 
 - status should be "running"
 
-1.3) improve your local vm by edit the base "dev" vm json.config (~/.docker/machine/machines/<name-of-you-machine/config.json)
+1.3) improve your local vm by edit the base "dev" vm json.config (~/.docker/machine/machines/<name-of-your-machine/config.json)
 
 [![DM Config](https://dl.dropbox.com/s/vpciez0a5katnu6/ssh-dm-config-001.png)](CONFIG)
 
