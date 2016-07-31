@@ -15,10 +15,10 @@ _current_
 
 ### CHANGE
 - move travis.sh logic into ./dctl-CLI helper
-- minor travis.yml exec improvements
 
 ### FIX
 - minor documentation issues
+- minor travis.yml exec improvements
 - naming issue in diverse local container startUp scripts
 
 ## [0.9.9], 2016-07-24:
